@@ -23,7 +23,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import six
 import dateutil.parser
-from openhab.types import DateTimeType, OnOffType, DecimalType, OpenCloseType
+from openhab.types import DateTimeType, OnOffType, DecimalType, OpenCloseType, ColorType
 
 __author__ = 'Georges Toth <georges@trypill.org>'
 __license__ = 'AGPLv3+'
@@ -220,3 +220,16 @@ class ContactItem(Item):
   def closed(self):
     """Set the state of the contact item to CLOSED"""
     self.state = 'CLOSED'
+    
+class ColorItem(Item):
+  """Color item type"""
+  types = [ColorType]
+
+  def on(self):
+    """Set the state of the color item to ON"""
+    self.state = 'ON'
+
+  def off(self):
+    """Set the state of the color item to OFF"""
+    self.state = 'OFF'
+
