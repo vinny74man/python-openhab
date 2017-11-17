@@ -23,7 +23,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import requests
 from requests.auth import HTTPBasicAuth
-from openhab.items import Item, DateTimeItem, SwitchItem, NumberItem, ContactItem
+from openhab.items import Item, DateTimeItem, SwitchItem, NumberItem, ContactItem, ColorItem
 
 __author__ = 'Georges Toth <georges@trypill.org>'
 __license__ = 'AGPLv3+'
@@ -177,6 +177,8 @@ class openHAB(object):
       return ContactItem(self, json_data)
     elif json_data['type'] == 'Number':
       return NumberItem(self, json_data)
+    elif json_data['type'] == 'Color':
+      return ColorItem(self, json_data)
     else:
       return Item(self, json_data)
 
