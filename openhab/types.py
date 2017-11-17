@@ -173,3 +173,34 @@ class DateTimeType(CommandType):
     """
     if not isinstance(value, datetime.datetime):
       raise ValueError()
+      
+class ColorType(StringType):
+  """ColorType type class"""
+  @classmethod
+  def validate(cls, value):
+    """Value validation method.
+    Valid values are ``ON`` and ``OFF`` or HSB value.
+    Args:
+      value (str): The value to validate.
+    Raises:
+      ValueError: Raises ValueError if an invalid value has been specified.
+    """
+    super(ColorType, cls).validate(value)
+
+    if value not in ['ON', 'OFF']:
+      if len(value.split(',')) == 3:
+        count = 0
+        for i in value.split(','):
+          if i.isdigit():
+            if count == 0 and 0 <= int(i) <= 360:
+              count += 1
+            elif count == 1 and 0 <= int(i) <= 100:
+              count += 1
+            elif count == 2 and 0 <= int(i) <= 100:
+              pass
+            else:
+              raise ValueError()
+          else:
+            raise ValueError()
+      else:
+        raise ValueError()
